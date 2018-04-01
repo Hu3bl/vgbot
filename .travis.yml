@@ -1,6 +1,6 @@
 language: csharp
 mono: none
-dotnet: latest
+dotnet: 2.1.101
 script:
   - dotnet restore ./vgbot/
   - dotnet build ./vgbot/
