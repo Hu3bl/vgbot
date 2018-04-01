@@ -1,12 +1,12 @@
 using System;
 using Xunit;
 
-namespace vgbot_test
+namespace Vgbot_test
 {
-    public class UnitTest1
+    public class UnitTestClass
     {
         [Fact]
-        public void Test1()
+        public void TrueTest()
         {
             Assert.True(true);
         }
