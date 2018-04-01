@@ -1,6 +1,6 @@
 namespace Vgbot.Core.Messages
 {
-    public class RoundStartMessage
+    public class RoundStartMessage : IMessage
     {
         public int Time { get; set; }
     }

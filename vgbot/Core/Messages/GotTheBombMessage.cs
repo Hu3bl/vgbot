@@ -1,6 +1,6 @@
 namespace Vgbot.Core.Messages
 {
-    public class GotTheBombMessage
+    public class GotTheBombMessage : IMessage
     {
         public string UserName { get; set; }
         public string UserTeam { get; set; }

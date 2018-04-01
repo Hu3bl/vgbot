@@ -1,6 +1,6 @@
 namespace Vgbot.Core.Messages
 {
-    public class PurchasedMessage
+    public class PurchasedMessage : IMessage
     {
         public string UserID { get; set; }
         public string UserName { get; set; }

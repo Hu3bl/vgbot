@@ -1,6 +1,6 @@
 namespace Vgbot.Core.Messages
 {
-    public class KillMessage
+    public class KillMessage : IMessage
     {
         public string UserID { get; set; }
         public string UserName { get; set; }

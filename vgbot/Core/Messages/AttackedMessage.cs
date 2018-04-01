@@ -1,7 +1,7 @@
 
 namespace Vgbot.Core.Messages
 {
-    public class AttackedMessage
+    public class AttackedMessage : IMessage
     {
         public string AttackerName { get; set; }
         public string AttackerUserID { get; set; }

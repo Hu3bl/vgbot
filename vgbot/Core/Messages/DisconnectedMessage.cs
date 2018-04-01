@@ -1,6 +1,6 @@
 namespace Vgbot.Core.Messages
 {
-    public class DisconnectedMessage
+    public class DisconnectedMessage : IMessage
     {
         public string UserID { get; set; }
         public string UserName { get; set; }

@@ -1,6 +1,6 @@
 namespace Vgbot.Core.Messages
 {
-    public class RoundScoredMessage
+    public class RoundScoredMessage : IMessage
     {
         public string Team { get; set; }
         public string TeamWin { get; set; }

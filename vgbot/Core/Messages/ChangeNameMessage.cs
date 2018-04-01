@@ -1,6 +1,6 @@
 namespace Vgbot.Core.Messages
 {
-    public class ChangeNameMessage
+    public class ChangeNameMessage : IMessage
     {
         public string UserID { get; set; }
         public string UserName { get; set; }

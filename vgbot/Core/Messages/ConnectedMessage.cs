@@ -1,6 +1,6 @@
 namespace Vgbot.Core.Messages
 {
-    public class ConnectedMessage
+    public class ConnectedMessage : IMessage
     {
         public string UserID { get; set; }
         public string UserName { get; set; }

@@ -1,6 +1,6 @@
 namespace Vgbot.Core.Messages
 {
-    public class RoundEndMessage
+    public class RoundEndMessage : IMessage
     {
         
     }
