@@ -9,5 +9,8 @@
 		{
 			"path": "../vgbot-test"
 		}
-	]
+	],
+	"settings": {
+		"dotnet-test-explorer.testProjectPath": "../vgbot-test"
+	}
 }

@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.IO;
-using vgbot.core.listener;
+using Vgbot.Core.Listener;
 
-namespace vgbot
+namespace Vgbot
 {
     class Program
     {

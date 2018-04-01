@@ -1,0 +1,9 @@
+language: csharp
+mono: none
+dotnet: latest
+script:
+  - dotnet restore ./vgbot/
+  - dotnet build ./vgbot/
+  - dotnet restore ./vgbot-test/
+  - dotnet build ./vgbot-test/
+  - dotnet test ./vgbot-test/
