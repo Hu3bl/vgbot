@@ -4,6 +4,6 @@ namespace Vgbot.Core.Parser.MessageRegex
 {
     public interface IRegex
     {
-        IMessage TryParse(string input);
+        bool TryParse(string input, out IMessage outMessage);
     }
 }
