@@ -17,14 +17,14 @@ namespace Vgbot.Core.Parser.MessageRegex
             {
                 KillAssistMessage message = new KillAssistMessage();
                 var match = regex.Match(input);
-                message.UserName = match.Groups[1].Value;
-                message.UserID = match.Groups[2].Value;
-                message.UserSteamID = match.Groups[3].Value;
-                message.UserTeam = match.Groups[4].Value;
-                message.KilledUserName = match.Groups[5].Value;
-                message.KilledUserID = match.Groups[6].Value;
-                message.KilledUserSteamID = match.Groups[7].Value;
-                message.KilledUserTeam = match.Groups[8].Value;
+                message.UserName = match.Groups["userName"].Value;
+                message.UserID = match.Groups["userId"].Value;
+                message.UserSteamID = match.Groups["userSteamId"].Value;
+                message.UserTeam = match.Groups["userTeam"].Value;
+                message.KilledUserName = match.Groups["killedUserName"].Value;
+                message.KilledUserID = match.Groups["killedUserId"].Value;
+                message.KilledUserSteamID = match.Groups["killedSteamId"].Value;
+                message.KilledUserTeam = match.Groups["killedUserTeam"].Value;
                                                                      
                 outMessage = message;
             }

@@ -16,8 +16,8 @@ namespace Vgbot.Core.Parser.MessageRegex
             {
                 ChangeMapMessage message = new ChangeMapMessage();
                 var match = regex.Match(input);
-                message.Type = match.Groups[1].Value;
-                message.Map = match.Groups[2].Value;
+                message.Type = match.Groups["type"].Value;
+                message.Map = match.Groups["map"].Value;
                                       
                 outMessage = message;
             }

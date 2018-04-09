@@ -16,11 +16,11 @@ namespace Vgbot.Core.Parser.MessageRegex
             {
                 BombDefusingMessage message = new BombDefusingMessage();
                 var match = regex.Match(input);
-                message.UserName = match.Groups[1].Value;
-                message.UserID = match.Groups[2].Value;
-                message.UserSteamID = match.Groups[3].Value;
-                message.UserTeam = match.Groups[4].Value;
-                message.Type = match.Groups[5].Value;
+                message.UserName = match.Groups["userName"].Value;
+                message.UserID = match.Groups["userId"].Value;
+                message.UserSteamID = match.Groups["userSteamId"].Value;
+                message.UserTeam = match.Groups["userTeam"].Value;
+                message.Type = match.Groups["type"].Value;
                 
                 outMessage = message;
             }

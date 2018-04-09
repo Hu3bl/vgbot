@@ -24,30 +24,30 @@ namespace Vgbot.Core.Parser.MessageRegex
             {
                 KillMessage message = new KillMessage();
                 var match = regex.Match(input);
-                message.UserName = match.Groups[1].Value;
-                message.UserID = match.Groups[2].Value;
-                message.UserSteamID = match.Groups[3].Value;
-                message.UserTeam = match.Groups[4].Value;
-                Int32.TryParse(match.Groups[5].Value, out int userPosX);
+                message.UserName = match.Groups["userName"].Value;
+                message.UserID = match.Groups["userId"].Value;
+                message.UserSteamID = match.Groups["userSteamId"].Value;
+                message.UserTeam = match.Groups["userTeam"].Value;
+                Int32.TryParse(match.Groups["userPosX"].Value, out int userPosX);
                 message.UserPosX = userPosX;
-                Int32.TryParse(match.Groups[6].Value, out int userPosY);
+                Int32.TryParse(match.Groups["userPosY"].Value, out int userPosY);
                 message.UserPosY = userPosY;
-                Int32.TryParse(match.Groups[7].Value, out int userPosZ);
+                Int32.TryParse(match.Groups["userPosZ"].Value, out int userPosZ);
                 message.UserPosZ = userPosZ;
-                message.KilledUserName = match.Groups[8].Value;
-                message.KilledUserID = match.Groups[9].Value;
-                message.KilledUserSteamID = match.Groups[10].Value;
-                message.KilledUserTeam = match.Groups[11].Value;
-                Int32.TryParse(match.Groups[12].Value, out int killedPosX);
+                message.KilledUserName = match.Groups["killedUserName"].Value;
+                message.KilledUserID = match.Groups["killedUserId"].Value;
+                message.KilledUserSteamID = match.Groups["killedSteamId"].Value;
+                message.KilledUserTeam = match.Groups["killedUserTeam"].Value;
+                Int32.TryParse(match.Groups["killedPosX"].Value, out int killedPosX);
                 message.KilledUserPosX = killedPosX;
-                Int32.TryParse(match.Groups[13].Value, out int killedPosY);
+                Int32.TryParse(match.Groups["killedPosY"].Value, out int killedPosY);
                 message.KilledUserPosY = killedPosY;
-                Int32.TryParse(match.Groups[14].Value, out int killedPosZ);
+                Int32.TryParse(match.Groups["killedPosZ"].Value, out int killedPosZ);
                 message.KilledUserPosZ = killedPosZ;
-                message.Weapon = match.Groups[15].Value;
+                message.Weapon = match.Groups["weapon"].Value;
 
                 Regex headshotRegex = new Regex(headshotPattern);
-                if(headshotRegex.IsMatch(match.Groups[16].Value))
+                if(headshotRegex.IsMatch(match.Groups["headshotOrPenetrated"].Value))
                 {
                     message.IsHeadshot = true;
                 }
@@ -57,7 +57,7 @@ namespace Vgbot.Core.Parser.MessageRegex
                 }
                                 
                 Regex penetratedRegex = new Regex(penetratedPattern);
-                if(penetratedRegex.IsMatch(match.Groups[16].Value))
+                if(penetratedRegex.IsMatch(match.Groups["headshotOrPenetrated"].Value))
                 {
                     message.IsPenetrated = true;
                 }

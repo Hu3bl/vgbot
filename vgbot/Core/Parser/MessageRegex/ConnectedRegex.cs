@@ -16,10 +16,10 @@ namespace Vgbot.Core.Parser.MessageRegex
             {
                 ConnectedMessage message = new ConnectedMessage();
                 var match = regex.Match(input);
-                message.UserName = match.Groups[1].Value;
-                message.UserID = match.Groups[2].Value;
-                message.UserSteamID = match.Groups[3].Value;
-                message.Address = match.Groups[4].Value;
+                message.UserName = match.Groups["userName"].Value;
+                message.UserID = match.Groups["userId"].Value;
+                message.UserSteamID = match.Groups["userSteamId"].Value;
+                message.Address = match.Groups["address"].Value;
                                       
                 outMessage = message;
             }

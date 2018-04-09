@@ -5,7 +5,7 @@ namespace Vgbot.Core.Parser.MessageRegex
 {
     public class DisconnectedRegex : IRegex
     {
-        private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\" disconnected";
+        private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\" disconnected \\(reason \"(?<reason>.*)\"\\)";
 
         public bool TryParse(string input, out IMessage outMessage)
         {
@@ -16,10 +16,11 @@ namespace Vgbot.Core.Parser.MessageRegex
             {
                 DisconnectedMessage message = new DisconnectedMessage();
                 var match = regex.Match(input);
-                message.UserName = match.Groups[1].Value;
-                message.UserID = match.Groups[2].Value;
-                message.UserSteamID = match.Groups[3].Value;
-                message.UserTeam = match.Groups[4].Value;
+                message.UserName = match.Groups["userName"].Value;
+                message.UserID = match.Groups["userId"].Value;
+                message.UserSteamID = match.Groups["userSteamId"].Value;
+                message.UserTeam = match.Groups["userTeam"].Value;
+                message.Reason = match.Groups["reason"].Value;
                                                      
                 outMessage = message;
             }
