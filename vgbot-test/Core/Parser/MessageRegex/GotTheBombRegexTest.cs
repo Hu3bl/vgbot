@@ -8,7 +8,7 @@ namespace Vgbot_test.Core.Parser.MessageRegex
     public class GotTheBombRegexTest
     {
         [Fact]        
-        public void CheckGotTheBombRegexRegex_GotTheBombMessageAsInput_ExpectedCorrectConstructionOfObject() 
+        public void CheckGotTheBombRegex_GotTheBombMessageAsInput_ExpectedCorrectConstructionOfObject() 
         {
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" triggered \"Got_The_Bomb\"";
                         
