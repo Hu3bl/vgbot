@@ -10,5 +10,6 @@ namespace Vgbot.Core.Messages
         public int PosY { get; set; }
         public int PosZ { get; set; }
         public string Stuff { get; set; }
+        public int Entindex { get; set; }
     }
 }

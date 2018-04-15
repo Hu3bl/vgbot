@@ -7,7 +7,7 @@ namespace Vgbot.Core.Parser.MessageRegex
     public class ThrewStuffRegex : IRegex
     {
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\""
-			+ " threw (?<stuff>hegrenade|flashbang|smokegrenade|decoy|molotov) \\[(?<posX>[\\-]?[0-9]+) (?<posY>[\\-]?[0-9]+) (?<posZ>[\\-]?[0-9]+)\\]";
+			+ " threw (?<stuff>hegrenade|flashbang|smokegrenade|decoy|molotov) \\[(?<posX>[\\-]?[0-9]+) (?<posY>[\\-]?[0-9]+) (?<posZ>[\\-]?[0-9]+)\\]( flashbang entindex (?<entindex>\\d+))?";
 
         public bool TryParse(string input, out IMessage outMessage)
         {
@@ -29,6 +29,11 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.PosY = posY;
                 Int32.TryParse(match.Groups["posZ"].Value, out int posZ);
                 message.PosZ = posZ;
+                if(match.Groups["entindex"].Value != string.Empty)
+                {
+                    Int32.TryParse(match.Groups["entindex"].Value, out int entindex);
+                    message.Entindex = entindex;
+                }
                 
                 outMessage = message;
             }
