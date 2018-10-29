@@ -7,12 +7,10 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "Team \"(?<team>CT|TERRORIST)\" scored \"(?<score>\\d+)\" with \"(?<players>\\d+)\" players";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 TeamScoredMessage message = new TeamScoredMessage();
                 var match = regex.Match(input);
@@ -20,9 +18,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.Score = match.Groups["score"].Value;
                 message.Players = match.Groups["players"].Value;
                 
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

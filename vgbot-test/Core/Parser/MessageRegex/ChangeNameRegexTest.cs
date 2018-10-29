@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Hu3bl<2><STEAM_1:1:10481859><CT>\" changed name to \"Hu3blele\"";
             
             var regex = new ChangeNameRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var changeNameMessage = (ChangeNameMessage) message;         
                         
             Assert.Equal("Hu3bl", changeNameMessage.UserName);

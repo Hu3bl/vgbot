@@ -7,12 +7,10 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\" say \"(?<text>.*)\"";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 SayMessage message = new SayMessage();
                 var match = regex.Match(input);
@@ -22,9 +20,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.UserTeam = match.Groups["userTeam"].Value;
                 message.Text = match.Groups["text"].Value;
                 
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

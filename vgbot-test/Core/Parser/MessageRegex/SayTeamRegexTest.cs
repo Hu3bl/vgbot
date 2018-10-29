@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" say_team \":D\"";
 		
             var regex = new SayTeamRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var sayTeamMessage = (SayTeamMessage) message;         
                         
             Assert.Equal("Hu3bl", sayTeamMessage.UserName);

@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "rcon from \"172.17.0.3:37058\": command \"exec server.cfg;\"";
 		
             var regex = new RconCommandRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var rconCommandMessage = (RconCommandMessage) message;         
                         
             Assert.Equal("172.17.0.3:37058", rconCommandMessage.From);

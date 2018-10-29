@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "Loading map \"de_cbble\"";
             
             var regex = new ChangeMapRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var changeMapMessage = (ChangeMapMessage) message;         
                         
             Assert.Equal("Loading map", changeMapMessage.Type);

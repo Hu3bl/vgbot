@@ -10,12 +10,10 @@ namespace Vgbot.Core.Parser.MessageRegex
         private static readonly string pattern = "\"(?<victimUserName>.+)[<](?<victimUserId>\\d+)[>][<](?<victimUserSteamId>.*)[>][<](?<victimUserTeam>CT|TERRORIST|Unassigned|Spectator)[>]\" "
          + "blinded for (?<duration>.+) by \"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\" from flashbang entindex (?<entindex>\\d+)";
        
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 BlindedMessage message = new BlindedMessage();
                 var match = regex.Match(input);
@@ -30,11 +28,11 @@ namespace Vgbot.Core.Parser.MessageRegex
                 Double.TryParse(match.Groups["duration"].Value, NumberStyles.Any, CultureInfo.InvariantCulture, out double duration);
                 message.Duration = duration;
                 Int32.TryParse(match.Groups["entindex"].Value, out int entindex);
-                message.Entindex = entindex;                
-                                                                     
-                outMessage = message;
+                message.Entindex = entindex;
+
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

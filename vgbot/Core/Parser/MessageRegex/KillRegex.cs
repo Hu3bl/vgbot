@@ -15,12 +15,10 @@ namespace Vgbot.Core.Parser.MessageRegex
         private static readonly string headshotPattern = "\\(.*headshot.*\\)";
 	    private static readonly string penetratedPattern = "\\(.*penetrated.*\\)";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 KillMessage message = new KillMessage();
                 var match = regex.Match(input);
@@ -66,9 +64,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                     message.IsPenetrated = false;
                 }
                                                                      
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

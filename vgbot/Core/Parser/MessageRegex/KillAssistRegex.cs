@@ -8,12 +8,10 @@ namespace Vgbot.Core.Parser.MessageRegex
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\" "
 			+ "assisted killing \"(?<killedUserName>.+)[<](?<killedUserId>\\d+)[>][<](?<killedSteamId>.*)[>][<](?<killedUserTeam>CT|TERRORIST|Unassigned|Spectator)[>]\"";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 KillAssistMessage message = new KillAssistMessage();
                 var match = regex.Match(input);
@@ -26,9 +24,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.KilledUserSteamID = match.Groups["killedSteamId"].Value;
                 message.KilledUserTeam = match.Groups["killedUserTeam"].Value;
                                                                      
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

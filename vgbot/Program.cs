@@ -12,11 +12,11 @@ namespace Vgbot
     {
         static void Main(string[] args)
         {
-            Parser parser = new Parser();
+            var parser = new Parser();
 
-            FileStream fileStream = new FileStream("../vgbot-test/match1.log", FileMode.Open);
+            FileStream fileStream = new FileStream("./logOfServer2.log", FileMode.Open);
             //Console.WriteLine(fileStream.);
-            using (StreamReader reader = new StreamReader(fileStream))
+            using (var reader = new StreamReader(fileStream))
             {
                 String line;
                 while((line = reader.ReadLine()) != null)  
@@ -25,7 +25,7 @@ namespace Vgbot
                     {
                         continue;
                     }
-                    if(parser.TryParse(line, out IMessage message))
+                    if(parser.TryParse(line))
                     {
                         //Console.WriteLine(line);
                         //Console.WriteLine(message.ToString());
@@ -55,10 +55,10 @@ namespace Vgbot
                 receivedData = buffer.Take();
                 String data = System.Text.Encoding.Default.GetString(receivedData);
                                 
-                //parser.TryParse()
+                //parser.Parse()
 
                 Console.WriteLine(data);
-                using (StreamWriter writer = new StreamWriter("./logOfServer.log", true))
+                using (StreamWriter writer = new StreamWriter("./logOfServer3.log", true))
                 {
                     writer.WriteLine(data);
                 }    

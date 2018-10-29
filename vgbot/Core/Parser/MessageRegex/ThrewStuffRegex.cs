@@ -9,12 +9,10 @@ namespace Vgbot.Core.Parser.MessageRegex
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\""
 			+ " threw (?<stuff>hegrenade|flashbang|smokegrenade|decoy|molotov) \\[(?<posX>[\\-]?[0-9]+) (?<posY>[\\-]?[0-9]+) (?<posZ>[\\-]?[0-9]+)\\]( flashbang entindex (?<entindex>\\d+))?";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 ThrewStuffMessage message = new ThrewStuffMessage();
                 var match = regex.Match(input);
@@ -35,9 +33,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                     message.Entindex = entindex;
                 }
                 
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

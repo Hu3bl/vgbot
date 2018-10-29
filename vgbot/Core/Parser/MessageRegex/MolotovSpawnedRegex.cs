@@ -9,12 +9,10 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "Molotov projectile spawned at (?<posX>.+) (?<posY>.+) (?<posZ>.+), velocity (?<velocityX>.+) (?<velocityY>.+) (?<velocityZ>.+)";
        
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 MolotovSpawnedMessage message = new MolotovSpawnedMessage();
                 var match = regex.Match(input);
@@ -25,9 +23,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.VelocityY = match.Groups["velocityY"].Value;
                 message.VelocityZ = match.Groups["velocityZ"].Value;               
                                                                      
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

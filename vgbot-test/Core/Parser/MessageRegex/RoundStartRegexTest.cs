@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "World triggered \"Round_Start\"";
 		
             var regex = new RoundStartRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             Assert.True(message is RoundStartMessage);
         }
     }

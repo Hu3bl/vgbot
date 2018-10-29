@@ -7,21 +7,19 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "(?<type>Started map|Loading map) \"(?<map>.*)\"";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 ChangeMapMessage message = new ChangeMapMessage();
                 var match = regex.Match(input);
                 message.Type = match.Groups["type"].Value;
                 message.Map = match.Groups["map"].Value;
                                       
-                outMessage = message;
+                return message;
             }
-            return isMatch;   
+            return null;   
         }
     }
 }

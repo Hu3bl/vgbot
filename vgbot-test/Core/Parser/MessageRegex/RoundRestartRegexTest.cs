@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "World triggered \"Restart_Round_(3_seconds)\"";
 		
             var regex = new RoundRestartRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var roundRestartMessage = (RoundRestartMessage) message;          
                         
             Assert.Equal(3, roundRestartMessage.Seconds);

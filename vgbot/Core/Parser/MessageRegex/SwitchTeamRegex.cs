@@ -7,12 +7,10 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>]\" switched from team [<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>] to [<](?<switchedTeam>CT|TERRORIST|Unassigned|Spectator)[>]";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 SwitchTeamMessage message = new SwitchTeamMessage();
                 var match = regex.Match(input);
@@ -22,9 +20,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.UserTeam = match.Groups["userTeam"].Value;
                 message.SwitchedTeam = match.Groups["switchedTeam"].Value;
                 
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

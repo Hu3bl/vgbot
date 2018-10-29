@@ -13,12 +13,10 @@ namespace Vgbot.Core.Parser.MessageRegex
 			+ "\\(damage \"(?<attackerDamage>[0-9]+)\"\\) \\(damage_armor \"(?<attackerDamageArmor>[0-9]+)\"\\) \\(health \"(?<victimHealth>[0-9]+)\"\\) "
 			+ "\\(armor \"(?<victimArmor>[0-9]+)\"\\) \\(hitgroup \"(?<attackerHitGroup>.*)\"\\)";
         
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 AttackedMessage message = new AttackedMessage();
                 var match = regex.Match(input);
@@ -53,9 +51,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.VictimArmor = victimArmor;
                 message.AttackerHitGroup = match.Groups["attackerHitGroup"].Value;
 
-                outMessage = message;
+                return message;
             }
-            return isMatch;          
+            return null;          
         }
     }
 }

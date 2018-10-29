@@ -7,12 +7,10 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<][>]\" entered the game";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 EnteredTheGameMessage message = new EnteredTheGameMessage();
                 var match = regex.Match(input);
@@ -20,9 +18,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.UserID = match.Groups["userId"].Value;
                 message.UserSteamID = match.Groups["userSteamId"].Value;
                                                                      
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

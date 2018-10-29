@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Nate<10><BOT><CT>\" blinded for 4.31 by \"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" from flashbang entindex 343";
             
             var regex = new BlindedRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var blindedMessage = (BlindedMessage) message; 
                     
             Assert.Equal("Hu3bl", blindedMessage.UserName);

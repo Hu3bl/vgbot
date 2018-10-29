@@ -7,14 +7,14 @@ namespace Vgbot.Core.Listener
 {
     public class Listener
     {
-        private readonly UdpClient udpClient;
-        private readonly BlockingCollection<byte[]> buffer;
+        private readonly UdpClient _udpClient;
+        private readonly BlockingCollection<byte[]> _buffer;
         public bool IsListening { get; private set; }
 
         public Listener(BlockingCollection<byte[]> buffer)
         {
-            udpClient = new UdpClient(3000);
-            this.buffer = buffer;
+            _udpClient = new UdpClient(3000);
+            _buffer = buffer;
         }
 
         public void BeginListening()
@@ -22,7 +22,7 @@ namespace Vgbot.Core.Listener
             try
             {
                 IsListening = true;
-                udpClient.BeginReceive(new AsyncCallback(DataReceived), null);
+                _udpClient.BeginReceive(DataReceived, null);
             }
             catch
             {
@@ -37,11 +37,11 @@ namespace Vgbot.Core.Listener
 
         private void DataReceived(IAsyncResult res)
         {
-            IPEndPoint RemoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-            buffer.Add(udpClient.EndReceive(res, ref RemoteIpEndPoint));
+            IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
+            _buffer.Add(_udpClient.EndReceive(res, ref remoteIpEndPoint));
             if(IsListening)
             {
-                udpClient.BeginReceive(new AsyncCallback(DataReceived), null);
+                _udpClient.BeginReceive(DataReceived, null);
             }
         }        
     }

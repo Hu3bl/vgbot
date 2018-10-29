@@ -8,21 +8,19 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "World triggered \"Restart_Round_\\((?<seconds>\\d+)_(second|seconds)\\)\"";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 RoundRestartMessage message = new RoundRestartMessage();
                 var match = regex.Match(input);
-                Int32.TryParse(match.Groups["seconds"].Value, out int seconds);
+                int.TryParse(match.Groups["seconds"].Value, out int seconds);
                 message.Seconds = seconds;
 
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

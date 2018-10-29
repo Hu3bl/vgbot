@@ -7,12 +7,10 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\" triggered \"Planted_The_Bomb\"";
         
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 BombPlantingMessage message = new BombPlantingMessage();
                 var match = regex.Match(input);
@@ -20,10 +18,10 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.UserID = match.Groups["userId"].Value;
                 message.UserSteamID = match.Groups["userSteamId"].Value;
                 message.UserTeam = match.Groups["userTeam"].Value;
-                                
-                outMessage = message;
+
+                return message;
             }
-            return isMatch;   		
+            return null;   		
         }
     }
 }

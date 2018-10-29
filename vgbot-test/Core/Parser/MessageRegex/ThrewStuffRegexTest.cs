@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" threw molotov [389 -65 -3]";
 		
             var regex = new ThrewStuffRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var threwStuffMessage = (ThrewStuffMessage) message;         
                         
             Assert.Equal("Hu3bl", threwStuffMessage.UserName);
@@ -33,7 +34,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" threw flashbang [389 -65 -3] flashbang entindex 196)";
 		
             var regex = new ThrewStuffRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var threwStuffMessage = (ThrewStuffMessage) message;         
                         
             Assert.Equal("Hu3bl", threwStuffMessage.UserName);

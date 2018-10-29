@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" assisted killing \"Yahn<3><BOT><CT>\"";
 		
             var regex = new KillAssistRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var killAssistMessage = (KillAssistMessage) message;         
                         
             Assert.Equal("Hu3bl", killAssistMessage.UserName);

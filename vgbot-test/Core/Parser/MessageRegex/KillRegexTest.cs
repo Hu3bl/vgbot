@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" [-608 2439 -210] killed \"Invict0<6><STEAM_1:0:1234567><CT>\" [-722 2424 -125] with \"glock\"";
             		
             var regex = new KillRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var killMessage = (KillMessage) message;         
                         
             Assert.Equal("Hu3bl", killMessage.UserName);
@@ -41,7 +42,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" [-608 2439 -210] killed \"Invict0<6><STEAM_1:0:1234567><CT>\" [-722 2424 -125] with \"glock\" (headshot)";
             		
             var regex = new KillRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var killMessage = (KillMessage) message;         
                         
             Assert.Equal("Hu3bl", killMessage.UserName);
@@ -69,7 +71,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" [-608 2439 -210] killed \"Invict0<6><STEAM_1:0:1234567><CT>\" [-722 2424 -125] with \"glock\" (penetrated)";
             		
             var regex = new KillRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var killMessage = (KillMessage) message;         
                         
             Assert.Equal("Hu3bl", killMessage.UserName);
@@ -97,7 +100,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" [-608 2439 -210] killed \"Invict0<6><STEAM_1:0:1234567><CT>\" [-722 2424 -125] with \"glock\" (headshot penetrated)";
             		
             var regex = new KillRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var killMessage = (KillMessage) message;         
                         
             Assert.Equal("Hu3bl", killMessage.UserName);

@@ -5,14 +5,12 @@ namespace Vgbot.Core.Parser.MessageRegex
 {
     public class DisconnectedRegex : IRegex
     {
-        private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\" disconnected \\(reason \"(?<reason>.*)\"\\)";
+        private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator|)[>]\" disconnected \\(reason \"(?<reason>.*)\"\\)";
 
-        public bool TryParse(string input, out IMessage outMessage)
+        public IMessage Parse(string input)
         {
-            outMessage = null;
             Regex regex = new Regex(pattern);
-            bool isMatch = regex.IsMatch(input);
-            if(isMatch)
+            if(regex.IsMatch(input))
             {
                 DisconnectedMessage message = new DisconnectedMessage();
                 var match = regex.Match(input);
@@ -22,9 +20,9 @@ namespace Vgbot.Core.Parser.MessageRegex
                 message.UserTeam = match.Groups["userTeam"].Value;
                 message.Reason = match.Groups["reason"].Value;
                                                      
-                outMessage = message;
+                return message;
             }
-            return isMatch;
+            return null;
         }
     }
 }

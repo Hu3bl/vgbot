@@ -7,7 +7,7 @@ namespace Vgbot.Core.Parser
 {
     public class Parser
     {
-        private List<IRegex> regexList;
+        private List<IRegex> _regexList;
         public Parser()
         {
             Init();
@@ -15,23 +15,23 @@ namespace Vgbot.Core.Parser
 
         private void Init()
         {
-            regexList = new List<IRegex>();
+            _regexList = new List<IRegex>();
             System.Reflection.Assembly assembly = System.Reflection.Assembly.GetEntryAssembly();
             foreach (System.Reflection.TypeInfo typeInfo in assembly.DefinedTypes)
             {
                 if (typeInfo.ImplementedInterfaces.Contains(typeof(IRegex)))
                 {
-                    regexList.Add(assembly.CreateInstance(typeInfo.FullName) as IRegex);
+                    _regexList.Add(assembly.CreateInstance(typeInfo.FullName) as IRegex);
                 }  
             }
         }
 
-        public bool TryParse(string data, out IMessage message)
+        public bool TryParse(string data)
         {
-            message = null;
-            foreach(var regex in regexList)
+            foreach(var regex in _regexList)
             {
-                if(regex.TryParse(data, out message))
+                IMessage message = regex.Parse(data);
+                if (message != null)
                 {
                     return true;
                 }

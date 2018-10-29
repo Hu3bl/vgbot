@@ -13,7 +13,8 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Hu3bl<2><STEAM_1:1:10481859><>\" entered the game";
                         
             var regex = new EnteredTheGameRegex();
-            Assert.True(regex.TryParse(input, out IMessage message));
+            IMessage message = regex.Parse(input);
+            Assert.NotNull(message);
             var enteredTheGameMessage = (EnteredTheGameMessage) message;         
                         
             Assert.Equal("Hu3bl", enteredTheGameMessage.UserName);
