@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "World triggered \"Round_Start\"";
 		
             var regex = new RoundStartRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            Assert.True(message is RoundStartMessage);
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            Assert.True(abstractMessage is RoundStartMessage);
         }
     }
 }

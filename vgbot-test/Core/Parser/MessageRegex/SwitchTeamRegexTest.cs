@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859>\" switched from team <TERRORIST> to <CT>";
 		
             var regex = new SwitchTeamRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var switchTeamMessage = (SwitchTeamMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var switchTeamMessage = (SwitchTeamMessage) abstractMessage;         
                         
             Assert.Equal("Hu3bl", switchTeamMessage.UserName);
             Assert.Equal("2", switchTeamMessage.UserID);

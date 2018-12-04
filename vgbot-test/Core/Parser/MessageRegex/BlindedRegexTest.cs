@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Nate<10><BOT><CT>\" blinded for 4.31 by \"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" from flashbang entindex 343";
             
             var regex = new BlindedRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var blindedMessage = (BlindedMessage) message; 
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var blindedMessage = (BlindedMessage) abstractMessage; 
                     
             Assert.Equal("Hu3bl", blindedMessage.UserName);
             Assert.Equal("2", blindedMessage.UserID);
@@ -26,7 +26,7 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             Assert.Equal("BOT", blindedMessage.VictimUserSteamID);
             Assert.Equal("CT", blindedMessage.VictimUserTeam);
             Assert.Equal(4.31, blindedMessage.Duration);
-            Assert.Equal(343, blindedMessage.Entindex);
+            Assert.Equal(343, blindedMessage.EntIndex);
         }	
     }
 }

@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "Team \"CT\" triggered \"SFUI_Notice_CTs_Win\" (CT \"1\") (T \"2\")";
 		
             var regex = new RoundScoredRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var roundScoredMessage = (RoundScoredMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var roundScoredMessage = (RoundScoredMessage) abstractMessage;         
                         
             Assert.Equal("CT", roundScoredMessage.Team);
             Assert.Equal("CTs_Win", roundScoredMessage.Type);

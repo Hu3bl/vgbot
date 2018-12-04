@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "Loading map \"de_cbble\"";
             
             var regex = new ChangeMapRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var changeMapMessage = (ChangeMapMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var changeMapMessage = (ChangeMapMessage) abstractMessage;         
                         
             Assert.Equal("Loading map", changeMapMessage.Type);
             Assert.Equal("de_cbble", changeMapMessage.Map);

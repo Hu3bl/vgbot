@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "Game Over: competitive  de_cache score 16:8 after 35 min";
 
             var regex = new GameOverRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var gameOverMessage = (GameOverMessage)message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var gameOverMessage = (GameOverMessage)abstractMessage;
 
             Assert.Equal("competitive", gameOverMessage.GameMode);
             Assert.Equal("de_cache", gameOverMessage.Map);

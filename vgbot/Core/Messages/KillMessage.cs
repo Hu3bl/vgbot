@@ -1,6 +1,17 @@
+using vgbot.Model;
+using vgbot.Model.Events;
+
 namespace Vgbot.Core.Messages
 {
-    public class KillMessage : IMessage
+    public enum eKillType
+    {
+        Normal,
+        Headshot,
+        Penetrated,
+        HeadshotPenetrated
+    }
+
+    public class KillMessage : AbstractMessage
     {
         public string UserID { get; set; }
         public string UserName { get; set; }
@@ -19,5 +30,32 @@ namespace Vgbot.Core.Messages
         public string Weapon { get; set; }
         public bool IsHeadshot { get; set; }
         public bool IsPenetrated { get; set; }
+
+        public override void Process(Match match)
+        {
+            var round = match.GetCurrentRound();
+
+            var kill = new Kill(match.GetPlayerWithId(UserSteamID), match.GetPlayerWithId(KilledUserSteamID), Weapon,
+                GetKillType());
+            round.RoundEvents.Add(kill);
+        }
+
+        private eKillType GetKillType()
+        {
+            if (IsHeadshot && IsPenetrated)
+            {
+                return eKillType.HeadshotPenetrated;
+            }
+            if(IsHeadshot)
+            {
+                return eKillType.Headshot;
+            }
+            if (IsPenetrated)
+            {
+                return eKillType.Penetrated;
+            }
+
+            return eKillType.Normal;
+        }
     }
 }

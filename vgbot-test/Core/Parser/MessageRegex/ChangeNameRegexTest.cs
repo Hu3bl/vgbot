@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Hu3bl<2><STEAM_1:1:10481859><CT>\" changed name to \"Hu3blele\"";
             
             var regex = new ChangeNameRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var changeNameMessage = (ChangeNameMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var changeNameMessage = (ChangeNameMessage) abstractMessage;         
                         
             Assert.Equal("Hu3bl", changeNameMessage.UserName);
             Assert.Equal("2", changeNameMessage.UserID);

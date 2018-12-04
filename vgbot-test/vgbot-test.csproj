@@ -1,9 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
 
     <IsPackable>false</IsPackable>
+
+    <RootNamespace>Vgbot-test</RootNamespace>
+
+    <AssemblyName>Vgbot-test</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -14,7 +18,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="../vgbot/vgbot.csproj" />
+    <ProjectReference Include="..\vgbot\Vgbot.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,12 +7,12 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "Starting Freeze period";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if (regex.IsMatch(input))
             {
-                var message = new StartingFrezePeriodMessage();
+                var message = new StartingFreezePeriodMessage();
                 var match = regex.Match(input);
 
                 return message;

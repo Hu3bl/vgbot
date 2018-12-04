@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" purchased \"ak47\"";
 		
             var regex = new PurchasedRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var purchasedMessage = (PurchasedMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var purchasedMessage = (PurchasedMessage) abstractMessage;         
                         
             Assert.Equal("Hu3bl", purchasedMessage.UserName);
             Assert.Equal("2", purchasedMessage.UserID);

@@ -1,7 +1,9 @@
 
+using vgbot.Model;
+
 namespace Vgbot.Core.Messages
 {
-    public class BlindedMessage : IMessage
+    public class BlindedMessage : AbstractMessage
     {
         public string UserName { get; set; }
         public string UserTeam { get; set; }
@@ -12,6 +14,12 @@ namespace Vgbot.Core.Messages
         public string VictimUserSteamID { get; set; }
         public string VictimUserTeam { get; set; }
         public double Duration { get; set; }
-        public int Entindex { get; set; }
+        public int EntIndex { get; set; }
+
+        public override void Process(Match match)
+        {
+            var round = match.GetCurrentRound();
+
+        }
     }
 }

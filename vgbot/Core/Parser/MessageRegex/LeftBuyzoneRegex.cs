@@ -8,18 +8,18 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\" left buyzone with \\[ (?<objects>.*)\\]";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if(regex.IsMatch(input))
             {
-                LeftBuyzoneMessage message = new LeftBuyzoneMessage();
+                LeftBuyzoneMessage abstractMessage = new LeftBuyzoneMessage();
                 var match = regex.Match(input);
-                message.UserName = match.Groups["userName"].Value;
-                message.UserID = match.Groups["userId"].Value;
-                message.UserSteamID = match.Groups["userSteamId"].Value;
-                message.UserTeam = match.Groups["userTeam"].Value;
-                message.Objects = new List<string>();
+                abstractMessage.UserName = match.Groups["userName"].Value;
+                abstractMessage.UserID = match.Groups["userId"].Value;
+                abstractMessage.UserSteamID = match.Groups["userSteamId"].Value;
+                abstractMessage.UserTeam = match.Groups["userTeam"].Value;
+                abstractMessage.Objects = new List<string>();
                 var objects = match.Groups["objects"].Value;
                 if(objects != string.Empty)
                 {
@@ -27,12 +27,12 @@ namespace Vgbot.Core.Parser.MessageRegex
                     {
                         if(item != string.Empty)
                         {
-                            message.Objects.Add(item);
+                            abstractMessage.Objects.Add(item);
                         }                        
                     }                    
                 }
                                                                                     
-                return message;
+                return abstractMessage;
             }
             return null;
         }

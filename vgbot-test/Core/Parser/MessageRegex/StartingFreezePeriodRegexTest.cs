@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "Starting Freeze period";
 
             var regex = new StartingFreezePeriodRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            Assert.True(message is StartingFrezePeriodMessage);
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            Assert.True(abstractMessage is StartingFreezePeriodMessage);
         }
     }
 }

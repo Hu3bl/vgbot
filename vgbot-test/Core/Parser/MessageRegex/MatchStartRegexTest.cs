@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "World triggered \"Match_Start\" on \"de_inferno\"";
 
             var regex = new MatchStartRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var matchStartMessage = (MatchStartMessage)message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var matchStartMessage = (MatchStartMessage)abstractMessage;
 
             Assert.Equal("de_inferno", matchStartMessage.Map);
         }

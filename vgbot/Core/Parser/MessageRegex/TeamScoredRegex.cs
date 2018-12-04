@@ -7,18 +7,18 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "Team \"(?<team>CT|TERRORIST)\" scored \"(?<score>\\d+)\" with \"(?<players>\\d+)\" players";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if(regex.IsMatch(input))
             {
-                TeamScoredMessage message = new TeamScoredMessage();
+                TeamScoredMessage abstractMessage = new TeamScoredMessage();
                 var match = regex.Match(input);
-                message.Team = match.Groups["team"].Value;
-                message.Score = match.Groups["score"].Value;
-                message.Players = match.Groups["players"].Value;
+                abstractMessage.Team = match.Groups["team"].Value;
+                abstractMessage.Score = match.Groups["score"].Value;
+                abstractMessage.Players = match.Groups["players"].Value;
                 
-                return message;
+                return abstractMessage;
             }
             return null;
         }

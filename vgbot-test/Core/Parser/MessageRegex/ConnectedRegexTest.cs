@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Hu3bl<2><STEAM_1:1:10481859><>\" connected, address \"\"";
                         
             var regex = new ConnectedRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var connectedMessage = (ConnectedMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var connectedMessage = (ConnectedMessage) abstractMessage;         
                         
             Assert.Equal("Hu3bl", connectedMessage.UserName);
             Assert.Equal("2", connectedMessage.UserID);

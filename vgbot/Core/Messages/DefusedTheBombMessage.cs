@@ -1,10 +1,17 @@
-﻿namespace Vgbot.Core.Messages
+﻿using vgbot.Model;
+
+namespace Vgbot.Core.Messages
 {
-    public class DefusedTheBombMessage : IMessage
+    public class DefusedTheBombMessage : AbstractMessage
     {
         public string UserID { get; set; }
         public string UserName { get; set; }
         public string UserTeam { get; set; }
         public string UserSteamID { get; set; }
+
+        public override void Process(Match match)
+        {
+            
+        }
     }
 }

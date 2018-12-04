@@ -9,31 +9,31 @@ namespace Vgbot.Core.Parser.MessageRegex
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<](?<userTeam>CT|TERRORIST|Unassigned|Spectator)[>]\""
 			+ " threw (?<stuff>hegrenade|flashbang|smokegrenade|decoy|molotov) \\[(?<posX>[\\-]?[0-9]+) (?<posY>[\\-]?[0-9]+) (?<posZ>[\\-]?[0-9]+)\\]( flashbang entindex (?<entindex>\\d+))?";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if(regex.IsMatch(input))
             {
-                ThrewStuffMessage message = new ThrewStuffMessage();
+                ThrewStuffMessage abstractMessage = new ThrewStuffMessage();
                 var match = regex.Match(input);
-                message.UserName = match.Groups["userName"].Value;
-                message.UserID = match.Groups["userId"].Value;
-                message.UserSteamID = match.Groups["userSteamId"].Value;
-                message.UserTeam = match.Groups["userTeam"].Value;
-                message.Stuff = match.Groups["stuff"].Value;
+                abstractMessage.UserName = match.Groups["userName"].Value;
+                abstractMessage.UserID = match.Groups["userId"].Value;
+                abstractMessage.UserSteamID = match.Groups["userSteamId"].Value;
+                abstractMessage.UserTeam = match.Groups["userTeam"].Value;
+                abstractMessage.Stuff = match.Groups["stuff"].Value;
                 Int32.TryParse(match.Groups["posX"].Value, out int posX);
-                message.PosX = posX;
+                abstractMessage.PosX = posX;
                 Int32.TryParse(match.Groups["posY"].Value, out int posY);
-                message.PosY = posY;
+                abstractMessage.PosY = posY;
                 Int32.TryParse(match.Groups["posZ"].Value, out int posZ);
-                message.PosZ = posZ;
+                abstractMessage.PosZ = posZ;
                 if(match.Groups["entindex"].Value != string.Empty)
                 {
                     Int32.TryParse(match.Groups["entindex"].Value, out int entindex);
-                    message.Entindex = entindex;
+                    abstractMessage.EntIndex = entindex;
                 }
                 
-                return message;
+                return abstractMessage;
             }
             return null;
         }

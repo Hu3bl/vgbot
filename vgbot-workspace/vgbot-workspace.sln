@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28010.2016
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vgbot", "..\vgbot\vgbot.csproj", "{ADB33862-FBEA-4B17-801E-D7730C220C1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Vgbot", "..\vgbot\Vgbot.csproj", "{ADB33862-FBEA-4B17-801E-D7730C220C1E}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vgbot-test", "..\vgbot-test\vgbot-test.csproj", "{4F4082AF-C5D7-4776-9490-8FB8F7B931B2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "vgbot-test", "..\vgbot-test\Vgbot-test.csproj", "{4F4082AF-C5D7-4776-9490-8FB8F7B931B2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

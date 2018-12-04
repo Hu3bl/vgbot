@@ -13,45 +13,45 @@ namespace Vgbot.Core.Parser.MessageRegex
 			+ "\\(damage \"(?<attackerDamage>[0-9]+)\"\\) \\(damage_armor \"(?<attackerDamageArmor>[0-9]+)\"\\) \\(health \"(?<victimHealth>[0-9]+)\"\\) "
 			+ "\\(armor \"(?<victimArmor>[0-9]+)\"\\) \\(hitgroup \"(?<attackerHitGroup>.*)\"\\)";
         
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if(regex.IsMatch(input))
             {
-                AttackedMessage message = new AttackedMessage();
+                AttackedMessage abstractMessage = new AttackedMessage();
                 var match = regex.Match(input);
-                message.AttackerName = match.Groups["attackerName"].Value;
-                message.AttackerUserID = match.Groups["attackerUserId"].Value;
-                message.AttackerSteamID = match.Groups["attackerSteamId"].Value;
-                message.AttackerTeam = match.Groups["attackerTeam"].Value;
+                abstractMessage.AttackerName = match.Groups["attackerName"].Value;
+                abstractMessage.AttackerUserID = match.Groups["attackerUserId"].Value;
+                abstractMessage.AttackerSteamID = match.Groups["attackerSteamId"].Value;
+                abstractMessage.AttackerTeam = match.Groups["attackerTeam"].Value;
                 Int32.TryParse(match.Groups["attackerPosX"].Value, out int attackerPosX);
-                message.AttackerPosX = attackerPosX;
+                abstractMessage.AttackerPosX = attackerPosX;
                 Int32.TryParse(match.Groups["attackerPosY"].Value, out int attackerPosY);
-                message.AttackerPosY = attackerPosY;
+                abstractMessage.AttackerPosY = attackerPosY;
                 Int32.TryParse(match.Groups["attackerPosZ"].Value, out int attackerPosZ);
-                message.AttackerPosZ = attackerPosZ;
-                message.VictimName = match.Groups["victimName"].Value;
-                message.VictimUserID = match.Groups["victimUserId"].Value;
-                message.VictimSteamID = match.Groups["victimSteamId"].Value;
-                message.VictimTeam = match.Groups["victimTeam"].Value;
+                abstractMessage.AttackerPosZ = attackerPosZ;
+                abstractMessage.VictimName = match.Groups["victimName"].Value;
+                abstractMessage.VictimUserID = match.Groups["victimUserId"].Value;
+                abstractMessage.VictimSteamID = match.Groups["victimSteamId"].Value;
+                abstractMessage.VictimTeam = match.Groups["victimTeam"].Value;
                 Int32.TryParse(match.Groups["victimPosX"].Value, out int victimPosX);
-                message.VictimPosX = victimPosX;
+                abstractMessage.VictimPosX = victimPosX;
                 Int32.TryParse(match.Groups["victimPosY"].Value, out int victimPosY);
-                message.VictimPosY = victimPosY;
+                abstractMessage.VictimPosY = victimPosY;
                 Int32.TryParse(match.Groups["victimPosZ"].Value, out int victimPosZ);
-                message.VictimPosZ = victimPosZ;
-                message.AttackerWeapon = match.Groups["attackerWeapon"].Value;
+                abstractMessage.VictimPosZ = victimPosZ;
+                abstractMessage.AttackerWeapon = match.Groups["attackerWeapon"].Value;
                 Int32.TryParse(match.Groups["attackerDamage"].Value, out int attackerDamage);
-                message.AttackerDamage = attackerDamage;
+                abstractMessage.AttackerDamage = attackerDamage;
                 Int32.TryParse(match.Groups["attackerDamageArmor"].Value, out int attackerDamageArmor);
-                message.AttackerDamageArmor = attackerDamageArmor;
+                abstractMessage.AttackerDamageArmor = attackerDamageArmor;
                 Int32.TryParse(match.Groups["victimHealth"].Value, out int victimHealth);
-                message.VictimHealth = victimHealth;
+                abstractMessage.VictimHealth = victimHealth;
                 Int32.TryParse(match.Groups["victimArmor"].Value, out int victimArmor);
-                message.VictimArmor = victimArmor;
-                message.AttackerHitGroup = match.Groups["attackerHitGroup"].Value;
+                abstractMessage.VictimArmor = victimArmor;
+                abstractMessage.AttackerHitGroup = match.Groups["attackerHitGroup"].Value;
 
-                return message;
+                return abstractMessage;
             }
             return null;          
         }

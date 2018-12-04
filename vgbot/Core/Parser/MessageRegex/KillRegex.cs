@@ -15,56 +15,56 @@ namespace Vgbot.Core.Parser.MessageRegex
         private static readonly string headshotPattern = "\\(.*headshot.*\\)";
 	    private static readonly string penetratedPattern = "\\(.*penetrated.*\\)";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if(regex.IsMatch(input))
             {
-                KillMessage message = new KillMessage();
+                KillMessage abstractMessage = new KillMessage();
                 var match = regex.Match(input);
-                message.UserName = match.Groups["userName"].Value;
-                message.UserID = match.Groups["userId"].Value;
-                message.UserSteamID = match.Groups["userSteamId"].Value;
-                message.UserTeam = match.Groups["userTeam"].Value;
+                abstractMessage.UserName = match.Groups["userName"].Value;
+                abstractMessage.UserID = match.Groups["userId"].Value;
+                abstractMessage.UserSteamID = match.Groups["userSteamId"].Value;
+                abstractMessage.UserTeam = match.Groups["userTeam"].Value;
                 Int32.TryParse(match.Groups["userPosX"].Value, out int userPosX);
-                message.UserPosX = userPosX;
+                abstractMessage.UserPosX = userPosX;
                 Int32.TryParse(match.Groups["userPosY"].Value, out int userPosY);
-                message.UserPosY = userPosY;
+                abstractMessage.UserPosY = userPosY;
                 Int32.TryParse(match.Groups["userPosZ"].Value, out int userPosZ);
-                message.UserPosZ = userPosZ;
-                message.KilledUserName = match.Groups["killedUserName"].Value;
-                message.KilledUserID = match.Groups["killedUserId"].Value;
-                message.KilledUserSteamID = match.Groups["killedSteamId"].Value;
-                message.KilledUserTeam = match.Groups["killedUserTeam"].Value;
+                abstractMessage.UserPosZ = userPosZ;
+                abstractMessage.KilledUserName = match.Groups["killedUserName"].Value;
+                abstractMessage.KilledUserID = match.Groups["killedUserId"].Value;
+                abstractMessage.KilledUserSteamID = match.Groups["killedSteamId"].Value;
+                abstractMessage.KilledUserTeam = match.Groups["killedUserTeam"].Value;
                 Int32.TryParse(match.Groups["killedPosX"].Value, out int killedPosX);
-                message.KilledUserPosX = killedPosX;
+                abstractMessage.KilledUserPosX = killedPosX;
                 Int32.TryParse(match.Groups["killedPosY"].Value, out int killedPosY);
-                message.KilledUserPosY = killedPosY;
+                abstractMessage.KilledUserPosY = killedPosY;
                 Int32.TryParse(match.Groups["killedPosZ"].Value, out int killedPosZ);
-                message.KilledUserPosZ = killedPosZ;
-                message.Weapon = match.Groups["weapon"].Value;
+                abstractMessage.KilledUserPosZ = killedPosZ;
+                abstractMessage.Weapon = match.Groups["weapon"].Value;
 
                 Regex headshotRegex = new Regex(headshotPattern);
                 if(headshotRegex.IsMatch(match.Groups["headshotOrPenetrated"].Value))
                 {
-                    message.IsHeadshot = true;
+                    abstractMessage.IsHeadshot = true;
                 }
                 else
                 {
-                    message.IsHeadshot = false;
+                    abstractMessage.IsHeadshot = false;
                 }
                                 
                 Regex penetratedRegex = new Regex(penetratedPattern);
                 if(penetratedRegex.IsMatch(match.Groups["headshotOrPenetrated"].Value))
                 {
-                    message.IsPenetrated = true;
+                    abstractMessage.IsPenetrated = true;
                 }
                 else
                 {
-                    message.IsPenetrated = false;
+                    abstractMessage.IsPenetrated = false;
                 }
                                                                      
-                return message;
+                return abstractMessage;
             }
             return null;
         }

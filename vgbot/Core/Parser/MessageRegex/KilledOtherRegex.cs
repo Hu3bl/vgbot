@@ -15,7 +15,7 @@ namespace Vgbot.Core.Parser.MessageRegex
         private static readonly string headshotPattern = "\\(.*headshot.*\\)";
         private static readonly string penetratedPattern = "\\(.*penetrated.*\\)";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if (regex.IsMatch(input))

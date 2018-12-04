@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"specialgreg<63><STEAM_1:0:127388238><TERRORIST>\" [726 -947 1678] was killed by the bomb.";
 
             var regex = new KilledByTheBombRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var killedByTheBombMessage = (KilledByTheBombMessage)message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var killedByTheBombMessage = (KilledByTheBombMessage)abstractMessage;
 
             Assert.Equal("specialgreg", killedByTheBombMessage.UserName);
             Assert.Equal("63", killedByTheBombMessage.UserID);

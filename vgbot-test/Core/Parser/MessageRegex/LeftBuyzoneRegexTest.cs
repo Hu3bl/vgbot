@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" left buyzone with [ weapon_knife_karambit weapon_p250 weapon_awp kevlar(74) helmet ]";
 		
             var regex = new LeftBuyzoneRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var leftBuyzoneMessage = (LeftBuyzoneMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var leftBuyzoneMessage = (LeftBuyzoneMessage) abstractMessage;         
                         
             Assert.Equal("Hu3bl", leftBuyzoneMessage.UserName);
             Assert.Equal("2", leftBuyzoneMessage.UserID);
@@ -35,9 +35,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "\"Hu3bl<2><STEAM_1:1:10481859><TERRORIST>\" left buyzone with [ ]";
 		
             var regex = new LeftBuyzoneRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var leftBuyzoneMessage = (LeftBuyzoneMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var leftBuyzoneMessage = (LeftBuyzoneMessage) abstractMessage;         
                         
             Assert.Equal("Hu3bl", leftBuyzoneMessage.UserName);
             Assert.Equal("2", leftBuyzoneMessage.UserID);

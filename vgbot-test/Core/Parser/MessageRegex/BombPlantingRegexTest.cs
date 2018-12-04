@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Hu3bl<2><STEAM_1:1:10481859><CT>\" triggered \"Planted_The_Bomb\"";
             
             var regex = new BombPlantingRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var bombPlantingMessage = (BombPlantingMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var bombPlantingMessage = (BombPlantingMessage) abstractMessage;         
                         
             Assert.Equal("Hu3bl", bombPlantingMessage.UserName);
             Assert.Equal("2", bombPlantingMessage.UserID);

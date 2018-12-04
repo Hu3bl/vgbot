@@ -7,17 +7,17 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "rcon from \"(?<from>.+)\": command \"(?<command>.*)\"";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if(regex.IsMatch(input))
             {
-                RconCommandMessage message = new RconCommandMessage();
+                RconCommandMessage abstractMessage = new RconCommandMessage();
                 var match = regex.Match(input);
-                message.From = match.Groups["from"].Value;
-                message.Command = match.Groups["command"].Value;
+                abstractMessage.From = match.Groups["from"].Value;
+                abstractMessage.Command = match.Groups["command"].Value;
                                                                      
-                return message;
+                return abstractMessage;
             }
             return null;
         }

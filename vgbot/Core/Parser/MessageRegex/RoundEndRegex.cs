@@ -7,15 +7,15 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "World triggered \"Round_End\"";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if(regex.IsMatch(input))
             {
-                RoundEndMessage message = new RoundEndMessage();
+                RoundEndMessage abstractMessage = new RoundEndMessage();
                 //var match = regex.Match(input);
                                                                      
-                return message;
+                return abstractMessage;
             }
             return null;
         }

@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "Molotov projectile spawned at -738.042908 10.161488 224.233917, velocity -423.780396 -854.355225 8.549564";
             
             var regex = new MolotovSpawnedRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var molotovSpawnedMessage = (MolotovSpawnedMessage) message; 
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var molotovSpawnedMessage = (MolotovSpawnedMessage) abstractMessage; 
                     
             Assert.Equal("-738.042908", molotovSpawnedMessage.PosX);
             Assert.Equal("10.161488", molotovSpawnedMessage.PosY);

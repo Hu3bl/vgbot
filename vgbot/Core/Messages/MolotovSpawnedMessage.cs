@@ -1,7 +1,9 @@
 
+using vgbot.Model;
+
 namespace Vgbot.Core.Messages
 {
-    public class MolotovSpawnedMessage : IMessage
+    public class MolotovSpawnedMessage : AbstractMessage
     {
         public string PosX { get; set; }
         public string PosY { get; set; }
@@ -9,5 +11,10 @@ namespace Vgbot.Core.Messages
         public string VelocityX { get; set; }
         public string VelocityY { get; set; }
         public string VelocityZ { get; set; }
+
+        public override void Process(Match match)
+        {
+            
+        }
     }
 }

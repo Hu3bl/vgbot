@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"richtiger TinaSohn<30><STEAM_1:1:15005833><TERRORIST>\" [-1404 -1569 -181] committed suicide with \"world\"";
 
             var regex = new CommittedSuicideRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var committedSuicideMessage = (CommittedSuicideMessage)message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var committedSuicideMessage = (CommittedSuicideMessage)abstractMessage;
 
             Assert.Equal("richtiger TinaSohn", committedSuicideMessage.UserName);
             Assert.Equal("30", committedSuicideMessage.UserID);
@@ -33,9 +33,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"richtiger TinaSohn<30><STEAM_1:1:15005833><TERRORIST>\" [-1404 -1569 -181] committed suicide with \"inferno\"";
 
             var regex = new CommittedSuicideRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var committedSuicideMessage = (CommittedSuicideMessage)message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var committedSuicideMessage = (CommittedSuicideMessage)abstractMessage;
 
             Assert.Equal("richtiger TinaSohn", committedSuicideMessage.UserName);
             Assert.Equal("30", committedSuicideMessage.UserID);

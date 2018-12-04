@@ -1,6 +1,8 @@
-﻿namespace Vgbot.Core.Messages
+﻿using vgbot.Model;
+
+namespace Vgbot.Core.Messages
 {
-    public class KilledOtherMessage : IMessage
+    public class KilledOtherMessage : AbstractMessage
     {
         public string UserID { get; set; }
         public string UserName { get; set; }
@@ -17,5 +19,10 @@
         public string Weapon { get; set; }
         public bool IsHeadshot { get; set; }
         public bool IsPenetrated { get; set; }
+
+        public override void Process(Match match)
+        {
+            
+        }
     }
 }

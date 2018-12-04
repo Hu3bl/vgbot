@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"WeedMonkey<67><STEAM_1:1:84194999><TERRORIST>\" [341 -429 96] killed other \"chicken<194>\" [344 -451 96] with \"knife_t\"";
 
             var regex = new KilledOtherRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var killedOtherMessage = (KilledOtherMessage)message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var killedOtherMessage = (KilledOtherMessage)abstractMessage;
 
             Assert.Equal("WeedMonkey", killedOtherMessage.UserName);
             Assert.Equal("67", killedOtherMessage.UserID);
@@ -40,9 +40,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"WeedMonkey<67><STEAM_1:1:84194999><TERRORIST>\" [341 -429 96] killed other \"chicken<194>\" [344 -451 96] with \"knife_t\" (headshot)";
 
             var regex = new KilledOtherRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var killedOtherMessage = (KilledOtherMessage)message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var killedOtherMessage = (KilledOtherMessage)abstractMessage;
 
             Assert.Equal("WeedMonkey", killedOtherMessage.UserName);
             Assert.Equal("67", killedOtherMessage.UserID);
@@ -67,9 +67,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"WeedMonkey<67><STEAM_1:1:84194999><TERRORIST>\" [341 -429 96] killed other \"chicken<194>\" [344 -451 96] with \"knife_t\" (penetrated)";
 
             var regex = new KilledOtherRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var killedOtherMessage = (KilledOtherMessage)message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var killedOtherMessage = (KilledOtherMessage)abstractMessage;
 
             Assert.Equal("WeedMonkey", killedOtherMessage.UserName);
             Assert.Equal("67", killedOtherMessage.UserID);
@@ -94,9 +94,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"WeedMonkey<67><STEAM_1:1:84194999><TERRORIST>\" [341 -429 96] killed other \"chicken<194>\" [344 -451 96] with \"knife_t\" (headshot penetrated)";
 
             var regex = new KilledOtherRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var killedOtherMessage = (KilledOtherMessage)message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var killedOtherMessage = (KilledOtherMessage)abstractMessage;
 
             Assert.Equal("WeedMonkey", killedOtherMessage.UserName);
             Assert.Equal("67", killedOtherMessage.UserID);

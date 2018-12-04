@@ -7,19 +7,19 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "\"(?<userName>.+)[<](?<userId>\\d+)[>][<](?<userSteamId>.*)[>][<][>]\" connected, address \"(?<address>.*)\"";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if(regex.IsMatch(input))
             {
-                ConnectedMessage message = new ConnectedMessage();
+                ConnectedMessage abstractMessage = new ConnectedMessage();
                 var match = regex.Match(input);
-                message.UserName = match.Groups["userName"].Value;
-                message.UserID = match.Groups["userId"].Value;
-                message.UserSteamID = match.Groups["userSteamId"].Value;
-                message.Address = match.Groups["address"].Value;
+                abstractMessage.UserName = match.Groups["userName"].Value;
+                abstractMessage.UserID = match.Groups["userId"].Value;
+                abstractMessage.UserSteamID = match.Groups["userSteamId"].Value;
+                abstractMessage.Address = match.Groups["address"].Value;
                                       
-                return message;
+                return abstractMessage;
             }
             return null;
         }

@@ -2,18 +2,19 @@ using System;
 using System.Collections.Concurrent;
 using System.Net;
 using System.Net.Sockets;
+using vgbot.Core.Listener;
 
 namespace Vgbot.Core.Listener
 {
     public class Listener
     {
         private readonly UdpClient _udpClient;
-        private readonly BlockingCollection<byte[]> _buffer;
+        private readonly BlockingCollection<DataPacket> _buffer;
         public bool IsListening { get; private set; }
 
-        public Listener(BlockingCollection<byte[]> buffer)
+        public Listener(BlockingCollection<DataPacket> buffer, int port)
         {
-            _udpClient = new UdpClient(3000);
+            _udpClient = new UdpClient(port);
             _buffer = buffer;
         }
 
@@ -38,7 +39,8 @@ namespace Vgbot.Core.Listener
         private void DataReceived(IAsyncResult res)
         {
             IPEndPoint remoteIpEndPoint = new IPEndPoint(IPAddress.Any, 0);
-            _buffer.Add(_udpClient.EndReceive(res, ref remoteIpEndPoint));
+            var dataPacket = new DataPacket(_udpClient.EndReceive(res, ref remoteIpEndPoint), remoteIpEndPoint);
+            _buffer.Add(dataPacket);
             if(IsListening)
             {
                 _udpClient.BeginReceive(DataReceived, null);

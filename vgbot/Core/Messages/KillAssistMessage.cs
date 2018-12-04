@@ -1,6 +1,8 @@
+using vgbot.Model;
+
 namespace Vgbot.Core.Messages
 {
-    public class KillAssistMessage : IMessage
+    public class KillAssistMessage : AbstractMessage
     {
         public string UserID { get; set; }
         public string UserName { get; set; }
@@ -10,5 +12,10 @@ namespace Vgbot.Core.Messages
         public string KilledUserName { get; set; }
         public string KilledUserTeam { get; set; }
         public string KilledUserSteamID { get; set; }
+
+        public override void Process(Match match)
+        {
+            
+        }
     }
 }

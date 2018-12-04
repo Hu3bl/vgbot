@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Hu3bl<2><STEAM_1:1:10481859><CT>\" disconnected (reason \"Disconnect\")";
 
             var regex = new DisconnectedRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var disconnectedMessage = (DisconnectedMessage) message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var disconnectedMessage = (DisconnectedMessage) abstractMessage;
 
             Assert.Equal("Hu3bl", disconnectedMessage.UserName);
             Assert.Equal("2", disconnectedMessage.UserID);
@@ -30,9 +30,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"WeedMonkey<77><STEAM_1:1:84194999><>\" disconnected (reason \"Disconnect\")";
             
             var regex = new DisconnectedRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var disconnectedMessage = (DisconnectedMessage) message;
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var disconnectedMessage = (DisconnectedMessage) abstractMessage;
 
             Assert.Equal("WeedMonkey", disconnectedMessage.UserName);
             Assert.Equal("77", disconnectedMessage.UserID);

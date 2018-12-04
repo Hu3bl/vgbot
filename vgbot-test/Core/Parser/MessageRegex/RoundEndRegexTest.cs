@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "World triggered \"Round_End\"";
 		
             var regex = new RoundEndRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            Assert.True(message is RoundEndMessage);
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            Assert.True(abstractMessage is RoundEndMessage);
         }
     }
 }

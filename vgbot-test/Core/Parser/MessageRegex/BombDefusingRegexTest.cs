@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Hu3bl<2><STEAM_1:1:10481859><CT>\" triggered \"Begin_Bomb_Defuse_With_Kit\"";
             
             var regex = new BombDefusingRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var bombDefusingMessage = (BombDefusingMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var bombDefusingMessage = (BombDefusingMessage) abstractMessage;         
                         
             Assert.Equal("Hu3bl", bombDefusingMessage.UserName);
             Assert.Equal("2", bombDefusingMessage.UserID);
@@ -30,9 +30,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             string input = "\"Hu3bl<2><STEAM_1:1:10481859><CT>\" triggered \"Begin_Bomb_Defuse_Without_Kit\"";
             
             var regex = new BombDefusingRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var bombDefusingMessage = (BombDefusingMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var bombDefusingMessage = (BombDefusingMessage) abstractMessage;         
                         
             Assert.Equal("Hu3bl", bombDefusingMessage.UserName);
             Assert.Equal("2", bombDefusingMessage.UserID);

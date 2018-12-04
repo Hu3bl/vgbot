@@ -8,7 +8,7 @@ namespace Vgbot.Core.Parser.MessageRegex
     {
         private static readonly string pattern = "World triggered \"Match_Start\" on \"(?<map>.+)\"";
 
-        public IMessage Parse(string input)
+        public AbstractMessage Parse(string input)
         {
             Regex regex = new Regex(pattern);
             if (regex.IsMatch(input))

@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using vgbot.Core.Listener;
 using Vgbot.Core.Messages;
 using Vgbot.Core.Parser.MessageRegex;
 
@@ -16,7 +17,7 @@ namespace Vgbot.Core.Parser
         private void Init()
         {
             _regexList = new List<IRegex>();
-            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetEntryAssembly();
+            System.Reflection.Assembly assembly = System.Reflection.Assembly.GetAssembly(GetType());
             foreach (System.Reflection.TypeInfo typeInfo in assembly.DefinedTypes)
             {
                 if (typeInfo.ImplementedInterfaces.Contains(typeof(IRegex)))
@@ -26,17 +27,19 @@ namespace Vgbot.Core.Parser
             }
         }
 
-        public bool TryParse(string data)
+        public AbstractMessage TryParse(DataPacket dataPacket)
         {
-            foreach(var regex in _regexList)
+            string data = System.Text.Encoding.Default.GetString(dataPacket.Data);
+            foreach (var regex in _regexList)
             {
-                IMessage message = regex.Parse(data);
-                if (message != null)
+                AbstractMessage abstractMessage = regex.Parse(data);
+                if (abstractMessage != null)
                 {
-                    return true;
+                    abstractMessage.IpEndPoint = dataPacket.From;
+                    return abstractMessage;
                 }
             }
-            return false;
+            return null;
         }
     }
 }

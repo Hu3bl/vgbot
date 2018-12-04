@@ -13,9 +13,9 @@ namespace Vgbot_test.Core.Parser.MessageRegex
             String input = "Team \"CT\" scored \"7\" with \"5\" players";
 		
             var regex = new TeamScoredRegex();
-            IMessage message = regex.Parse(input);
-            Assert.NotNull(message);
-            var teamScoredMessage = (TeamScoredMessage) message;         
+            AbstractMessage abstractMessage = regex.Parse(input);
+            Assert.NotNull(abstractMessage);
+            var teamScoredMessage = (TeamScoredMessage) abstractMessage;         
                         
             Assert.Equal("CT", teamScoredMessage.Team);
             Assert.Equal("7", teamScoredMessage.Score);
